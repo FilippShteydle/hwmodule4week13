@@ -49,6 +49,7 @@
                     let date = new Date();
                     date.setMonth(month - 1);
                     date.setFullYear(year);
+                    date.setDate(1);
 
                     let days_in_month = 32 - new Date(year, month-1, 32).getDate();
 
