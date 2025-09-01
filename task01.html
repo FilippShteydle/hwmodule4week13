@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task01</title>
+    <style>
+        .conteiner {
+            width: 40%;
+            background-color: #fbf2e9;
+            padding: 30px;
+        }
+
+        .line {
+            background-color: #d7d7d7;
+            width: 100%;
+            height: 20px;
+            align-content: center;
+        }
+
+        .box {
+            width: 30px;
+            height: 30px;
+            background-color: #2698fd;
+            position: relative;
+            top: -5px;
+            left: 50%;
+        }
+    </style>
+    <script>
+        window.onload = () => {
+
+            let flag = false;
+            document.querySelector(".box").addEventListener("mousedown", mousedownHandler);
+            document.querySelector(".box").addEventListener("mouseup", mouseupHandler);
+            document.querySelector(".line").addEventListener("mousemove", mousemoveHandler);
+            document.querySelector(".conteiner").addEventListener("mouseup", mouseupHandler);
+
+            function mousedownHandler(event) {
+                flag = true;
+            }
+
+            function mouseupHandler() {
+                flag = false;
+            }
+
+            function mousemoveHandler(event) {
+                if (flag) {
+                    let line = document.querySelector(".line");
+                    if (event.clientX > line.offsetLeft && event.clientX < line.offsetLeft + line.offsetWidth) {
+                        document.querySelector(".box").style.left = event.clientX - 50 + "px";
+                    } else if(event.clientX <= line.offsetLeft) {
+                        document.querySelector(".box").style.left = 0;
+                        flag = false;
+                    } else if (event.clientX >= line.offsetLeft + line.offsetWidth) {
+                        flag = false;
+                        document.querySelector(".box").style.left = line.offsetWidth - document.querySelector(".box").offsetWidth/2 + "px";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<main>
+    <div class="conteiner">
+        <div class="line">
+            <div class="box"></div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
